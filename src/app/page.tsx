@@ -3,36 +3,27 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex md:flex-row gap-[100px]">
-      <div className="flex-1 flex flex-col gap-[50px]">
-        {/* text  */}
-        <h1 className="text-[96px]">Discover New Ideas</h1>
-        <p className="text-[20px]">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est
-          recusandae deserunt ex, quaerat amet rerum.
+    <div className="flex flex-col xl:flex-row gap-[10px] items-center justify-center my-10 xl:mt-0">
+      {/* text  */}
+      <div className="flex flex-col gap-[50px]">
+        <h1 className="text-5xl">Discover New Ideas</h1>
+        <p className="text-xl">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error modi
+          aliquam eum ducimus a saepe!
         </p>
-        {/* buttons  */}
-        <div className="flex gap-[20px]">
-          <Link href="/about">
-            <button className="p-[20px] cursor-pointer rounded-md bg-blue-500 hover:bg-blue-600 transition">
-              Learn More
-            </button>
-          </Link>
-          <Link href="/contact">
-            <button className="p-[20px] cursor-pointer rounded-md bg-white text-black hover:bg-gray-300 transition">
-              Contact
-            </button>
-          </Link>
-        </div>
-        {/* brands  */}
-        <div className="w-[500px] h-[50px] relative">
-          <Image src="/brands.png" alt="brands" fill className="brandImg" />
+        <div className="flex gap-4">
+          <button className="p-4 bg-blue-500 hover:bg-blue-600 transition text-white rounded-md">
+            Learn More
+          </button>
+          <button className="p-4 bg-white hover:bg-gray-300 transition text-black rounded-md">
+            Contact
+          </button>
         </div>
       </div>
-      {/* Hero gif  */}
-      <div className="flex-1 relative hidden xl:block">
-        <Image src="/hero.gif" alt="hero image" fill className="heroImg" />
+      {/* image  */}
+      <div>
+        <Image src="/hero.gif" alt="hero image" width={500} height={400} />
       </div>
-    </div>
+    </div>  
   );
 }
