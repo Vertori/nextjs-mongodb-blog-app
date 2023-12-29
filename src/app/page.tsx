@@ -6,7 +6,9 @@ export default function Home() {
     <div className="flex flex-col xl:flex-row gap-[10px] items-center justify-center my-10 xl:mt-0">
       {/* text  */}
       <div className="flex flex-col gap-[50px]">
-        <h1 className="text-5xl">Discover New Ideas</h1>
+        <h1 className="text-5xl text-blue-500 font-semibold">
+          Discover New Ideas
+        </h1>
         <p className="text-xl">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Error modi
           aliquam eum ducimus a saepe!
@@ -24,6 +26,6 @@ export default function Home() {
       <div>
         <Image src="/hero.gif" alt="hero image" width={500} height={400} />
       </div>
-    </div>  
+    </div>
   );
 }
