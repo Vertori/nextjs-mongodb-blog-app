@@ -3,7 +3,7 @@ import React from "react";
 
 const AboutPage = () => {
   return (
-    <div className="flex flex-col xl:flex-row gap-12 justify-center items-center my-10 xl:mt-0">
+    <div className="flex flex-col xl:flex-row gap-12 justify-center items-center my-10 xl:mt-0 text-center sm:text-start">
       {/* text  */}
       <div className="flex flex-col gap-10 flex-1">
         <h1 className="text-5xl text-blue-500 font-semibold">About Us</h1>
@@ -19,7 +19,7 @@ const AboutPage = () => {
           transformative experiences that captivate and inspire.
         </p>
         {/* boxes  */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between gap-3 items-center text-center">
           {/* box 1 */}
           <div className="flex flex-col gap-2.5">
             <h3 className="text-blue-500 font-bold text-3xl">10+</h3>
