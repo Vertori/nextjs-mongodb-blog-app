@@ -7,6 +7,16 @@ interface SinglePostPageProps {
   params: { slug: string };
 }
 
+export const generateMetadata = async ({ params }: SinglePostPageProps) => {
+  const { slug } = params;
+  const post = await getPost(slug);
+
+  return {
+    title: post.title,
+    description: post.desc,
+  };
+};
+
 const SinglePostPage = async ({ params }: SinglePostPageProps) => {
   const { slug } = params;
 

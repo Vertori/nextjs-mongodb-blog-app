@@ -1,5 +1,11 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Contact page",
+  description: "This is contact page",
+};
 
 const ContactPage = () => {
   return (
