@@ -1,8 +1,12 @@
-import React from 'react'
+import { handleGithubLogin } from '@/lib/action'
 
 const LoginPage = () => {
   return (
-    <div>LoginPage</div>
+    <div>
+      <form action={handleGithubLogin}>
+      <button>Login with github</button>
+      </form>
+    </div>
   )
 }
 

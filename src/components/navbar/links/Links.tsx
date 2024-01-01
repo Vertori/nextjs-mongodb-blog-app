@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import NavLink from "./navLink/navLink";
 import { IoMdClose } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
+import { handleLogout } from "@/lib/action";
+import { auth } from "@/lib/auth";
 
 const links = [
   {
@@ -24,11 +26,11 @@ const links = [
   },
 ];
 
-const Links = () => {
+const Links = ({ session }: any) => {
   const [isOpen, setIsOpen] = useState(false);
 
   //TEMPORARY
-  const session = true;
+
   const isAdmin = true;
 
   return (
@@ -37,12 +39,16 @@ const Links = () => {
         {links.map((link) => (
           <NavLink link={link} key={link.title} />
         ))}
-        {session ? (
+        {session?.user ? (
           <>
-            {isAdmin && <NavLink link={{ title: "Admin", path: "/admin" }} />}
-            <button className="p-[10px] font-bold cursor-pointer text-black bg-white  ">
-              Logout
-            </button>
+            {session.user?.isAdmin && (
+              <NavLink link={{ title: "Admin", path: "/admin" }} />
+            )}
+            <form action={handleLogout}>
+              <button className="p-[10px] font-bold cursor-pointer text-black bg-white  ">
+                Logout
+              </button>
+            </form>
           </>
         ) : (
           <NavLink link={{ title: "Login", path: "/login" }} />
