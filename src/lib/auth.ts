@@ -2,6 +2,25 @@ import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 import { connectWithDb } from "./utils";
 import { User } from "./models";
+import CredentialsProvider from "next-auth/providers/credentials";
+
+const login = async (credentials: { username: string; password: string }) => {
+  try {
+    connectWithDb();
+    const user = await User.findOne({ username: credentials.username });
+    if (!user) {
+      throw new Error("Wrong credentials!");
+    }
+    // check if password is correct
+    if (credentials.password !== user.password) {
+      throw new Error("Wrong credentials!");
+    }
+    return user;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to login!");
+  }
+};
 
 export const {
   handlers: { GET, POST },
@@ -13,6 +32,17 @@ export const {
     GitHub({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+    }),
+    CredentialsProvider({
+      async authorize(credentials) {
+        try {
+          // @ts-ignore
+          const user = await login(credentials);
+          return user;
+        } catch (err) {
+          return null;
+        }
+      },
     }),
   ],
   callbacks: {
