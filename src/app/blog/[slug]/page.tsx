@@ -1,5 +1,6 @@
 import PostUser from "@/components/postUser/postUser";
 import { getPost } from "@/lib/data";
+import { PostInterface } from "@/lib/models";
 import Image from "next/image";
 import React, { Suspense } from "react";
 
@@ -7,6 +8,7 @@ interface SinglePostPageProps {
   params: { slug: string };
 }
 
+// METADATA
 export const generateMetadata = async ({ params }: SinglePostPageProps) => {
   const { slug } = params;
   const post = await getPost(slug);
@@ -16,11 +18,21 @@ export const generateMetadata = async ({ params }: SinglePostPageProps) => {
     description: post.desc,
   };
 };
+// FETCH POST BY API ROUTE
+const getData = async (slug: string): Promise<PostInterface> => {
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`);
+  if (!res.ok) {
+    throw new Error("Something went wrong while fetching this post...");
+  }
+  return res.json();
+};
 
 const SinglePostPage = async ({ params }: SinglePostPageProps) => {
   const { slug } = params;
 
-  const post = await getPost(slug);
+  // FETCH WITHOUT API
+  // const post = await getPost(slug);
+  const post = await getData(slug);
   return (
     <div className="flex flex-col-reverse xl:flex-row justify-center items-center gap-[50px] my-10 ">
       {/* Image container  */}
@@ -53,7 +65,7 @@ const SinglePostPage = async ({ params }: SinglePostPageProps) => {
           <div className="flex flex-col gap-[10px]">
             <span className="font-bold">Published</span>
             <span className="text-gray-300">
-              {post?.createdAt.toString().slice(4, 16)}
+              {post?.createdAt && new Date(post.createdAt).toLocaleDateString()}
             </span>
           </div>
         </div>

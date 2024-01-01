@@ -12,7 +12,7 @@ export const connectWithDb = async () => {
     const mongoUrl = process.env.MONGO;
 
     if (!mongoUrl) {
-      throw new Error("Mongo URI is undefined");
+      throw new Error("Mongo URL is undefined");
     }
 
     const db = await mongoose.connect(mongoUrl);

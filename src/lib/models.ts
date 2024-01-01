@@ -15,6 +15,7 @@ export interface PostInterface extends Document {
   img?: string;
   userId: string;
   slug: string;
+  createdAt?: string;
 }
 
 const userSchema = new mongoose.Schema(
