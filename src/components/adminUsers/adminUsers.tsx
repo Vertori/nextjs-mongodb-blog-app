@@ -10,8 +10,11 @@ const AdminUsers = async () => {
     <div>
       <h1>Users</h1>
       {users.map((user) => (
-        <div className="post" key={user.id}>
-          <div className="detail">
+        <div
+          className="my-5 flex items-center justify-between gap-5"
+          key={user.id}
+        >
+          <div className="flex items-center gap-5">
             <Image
               src={user.img || "/noAvatar.png"}
               alt="user avatar"
@@ -22,7 +25,9 @@ const AdminUsers = async () => {
           </div>
           <form action={deleteUser}>
             <input type="hidden" name="id" value={user.id} />
-            <button className="postButton">Delete</button>
+            <button className="py-[5px] px-[10px] bg-[#DC143C] text-black rounded-md border-none cursor-pointer">
+              Delete
+            </button>
           </form>
         </div>
       ))}
