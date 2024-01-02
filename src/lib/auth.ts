@@ -3,6 +3,7 @@ import GitHub from "next-auth/providers/github";
 import { connectWithDb } from "./utils";
 import { User } from "./models";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { authConfig } from "./auth.config";
 
 const login = async (credentials: { username: string; password: string }) => {
   try {
@@ -28,6 +29,7 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  ...authConfig,
   providers: [
     GitHub({
       clientId: process.env.GITHUB_ID,
@@ -69,5 +71,6 @@ export const {
       // if the user is already in db
       return true;
     },
+    ...authConfig.callbacks,
   },
 });
