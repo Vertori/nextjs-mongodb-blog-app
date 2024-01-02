@@ -1,26 +1,21 @@
-import { handleGithubLogin, login } from "@/lib/action";
+import LoginForm from "@/components/loginForm/loginForm";
+import { handleGithubLogin } from "@/lib/action";
+import { FaGithub } from "react-icons/fa";
 
 const LoginPage = () => {
   return (
-    <div>
-      <form action={handleGithubLogin}>
-        <button>Login with github</button>
-      </form>
-      <form action={login}>
-        <input
-          className="text-black"
-          type="text"
-          placeholder="username"
-          name="username"
-        />
-        <input
-          className="text-black"
-          type="password"
-          placeholder="password"
-          name="password"
-        />
-        <button>Login with Credentials</button>
-      </form>
+    <div className="flex items-center justify-center my-10 xl:mt-0">
+      <div className="w-full max-w-[500px] p-[50px] rounded-md bg-[#2d2b42]">
+        <form action={handleGithubLogin}>
+          <button className="w-full bg-white hover:bg-gray-200 transition text-black mb-5 p-5 cursor-pointer flex justify-center items-center gap-4">
+            Login with GitHub <FaGithub className="text-2xl" />
+          </button>
+        </form>
+        <div className="flex justify-center mb-5">
+          <span>OR</span>
+        </div>
+        <LoginForm />
+      </div>
     </div>
   );
 };

@@ -49,12 +49,12 @@ export const handleLogout = async () => {
   await signOut();
 };
 
-export const register = async (formData: FormData) => {
+export const register = async (previousState, formData: FormData) => {
   const { username, email, password, passwordRepeat, img } =
     Object.fromEntries(formData);
   // if passwords do not match
   if (password !== passwordRepeat) {
-    return "Passwords aren't the same!";
+    return { error: "Passwords aren't the same!" };
   }
 
   try {
@@ -62,7 +62,7 @@ export const register = async (formData: FormData) => {
     const user = await User.findOne({ username });
     // if user is already in db
     if (user) {
-      return "Username already exists";
+      return { error: "Username already exists" };
     }
 
     // if user doesn't exist in db
@@ -75,19 +75,27 @@ export const register = async (formData: FormData) => {
 
     await newUser.save();
     console.log("saved to db");
+    return { success: true };
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
   }
 };
 
-export const login = async (formData: FormData) => {
+export const login = async (previousState, formData: FormData) => {
   const { username, password } = Object.fromEntries(formData);
 
   try {
     await signIn("credentials", { username, password });
   } catch (err) {
     console.log(err);
-    return { error: "Something went wrong!" };
+
+    if (err instanceof Error) {
+      if (err.message.includes("CredentialsSignin")) {
+        return { error: "Invalid username or password!" };
+      }
+    }
+
+    throw err;
   }
 };
