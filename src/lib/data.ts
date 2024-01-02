@@ -1,8 +1,8 @@
-import { Post, User } from "./models";
+import { Post, PostInterface, User, UserInterface } from "./models";
 import { connectWithDb } from "./utils";
 import { unstable_noStore as noStore } from "next/cache";
 
-export const getPosts = async () => {
+export const getPosts = async (): Promise<PostInterface[]> => {
   try {
     connectWithDb();
     const posts = await Post.find();
@@ -13,7 +13,7 @@ export const getPosts = async () => {
   }
 };
 
-export const getPost = async (slug: string) => {
+export const getPost = async (slug: string): Promise<PostInterface> => {
   try {
     connectWithDb();
     const post = await Post.findOne({ slug });
@@ -24,7 +24,7 @@ export const getPost = async (slug: string) => {
   }
 };
 
-export const getUser = async (id: string) => {
+export const getUser = async (id: string): Promise<UserInterface> => {
   noStore();
   try {
     connectWithDb();
@@ -36,7 +36,7 @@ export const getUser = async (id: string) => {
   }
 };
 
-export const getUsers = async () => {
+export const getUsers = async (): Promise<UserInterface[]> => {
   try {
     connectWithDb();
     const users = await User.find();
